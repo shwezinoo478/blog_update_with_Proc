@@ -1,0 +1,35 @@
+
+<h4><b>Category </b> </h4>
+<ul class="list-group list-group-flush " id="category_list">
+    <li class="list-group-item"><a href="{% url 'view_posts' %}">All</a></li>
+
+</ul>
+
+<script type="text/javascript">
+    async function load_category(){
+        const list = document.getElementById("category_list");
+        try{
+            const response = await fetch("{% url 'get_json_data' %}")
+            const data = await response.json();
+            Object.keys(data).forEach(val => {
+
+                const item = document.createElement('a');
+                item.href = "{% url 'view_posts' %}?category="+data[val] 
+                item.className = "list-group-item"
+                item.innerHTML = val
+                list.append(item)
+              });
+           
+        }catch (error){
+            alert (error);
+        }
+    }
+    window.addEventListener('load' , (e)=>{
+        load_category();
+    })
+
+
+
+
+    
+</script>

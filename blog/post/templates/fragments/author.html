@@ -1,0 +1,35 @@
+
+<h4><b>Author </b> </h4>
+<ul class="list-group list-group-flush " id="category_list_author">
+
+</ul>
+
+<script type="text/javascript">
+    async function load_author(){
+        const list_author = document.getElementById("category_list_author");
+        try{
+            const response = await fetch("{% url 'get_json_author' %}")
+            const data = await response.json();
+            
+            Object.keys(data).forEach(val => {
+
+                const item_author = document.createElement('a');
+                item_author.href="{% url 'view_posts'%}?author="+data[val] 
+                item_author.className = "list-group-item"
+                item_author.innerHTML = val
+                list_author.append(item_author);
+              });
+           
+        }catch (error){
+            alert (error);
+        }
+    }
+    window.addEventListener('load' , (e)=>{
+        load_author();
+    })
+
+
+
+
+    
+</script>

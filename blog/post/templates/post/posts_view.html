@@ -1,0 +1,61 @@
+{% extends 'post/generic/index.html' %}
+
+{% block contend %}
+    {% for post  in pages %}
+      <div class="pt-2">
+        <div class="card rounded border border-dark">
+          <div class="card-header bg-dark">
+            <h2 class=" card-header-tabs text-light">{{post.title}}</h2>
+            <div class="row text-muted pt-3">
+              <div class="col-4"><h6> Posted by : {{post.posted_by}}
+                <h6>{{Author.email}}</h6>
+              </div>
+
+              <div class="col "> <h6> Label : {{post.label}} </div>
+              <div class="col ">{{post.posted_at}}</div>
+              
+          </div>
+          <div class="card-body bg-warning">
+            
+            <p class="card-text">{{post.content}}</p>
+            <em><a href="{% url 'post_detail' id=post.id %}" class="text-dark" >More Details here</a></em>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+
+    <div class="pagination">
+      <span class="step-links">
+          {% if pages.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ pages.previous_page_number }}">previous</a>
+          {% endif %}
+  
+          <span class="current">
+              Page {{ pages.number }} of {{ pages.paginator.num_pages }}.
+          </span>
+  
+          {% if pages.has_next %}
+              <a href="?page={{ pages.next_page_number }}">next</a>
+              <a href="?page={{ pages.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+                    
+                    
+{% endblock contend %}
+            
+
+
+            
+
+
+
+
+          </div>
+          
+        </div>
+    </body>
+
+</html>
